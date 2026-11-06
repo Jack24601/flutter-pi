@@ -290,7 +290,16 @@ struct gl_renderer *gl_renderer_new_from_gbm_device(
     } else {
         // choose a config
         const EGLint config_attribs[] = {
-            EGL_SURFACE_TYPE, EGL_WINDOW_BIT, EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL_SAMPLES, 0, EGL_NONE,
+            EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+            EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+
+            EGL_DEPTH_SIZE, 24,
+            EGL_STENCIL_SIZE, 8,
+
+            EGL_SAMPLE_BUFFERS, 1,
+            EGL_SAMPLES, 4,
+
+            EGL_NONE,
         };
 
         if (has_forced_pixel_format == false) {
@@ -662,7 +671,18 @@ gl_renderer_choose_config(struct gl_renderer *renderer, bool has_desired_pixel_f
         return renderer->forced_egl_config;
     }
 
-    const EGLint config_attribs[] = { EGL_SURFACE_TYPE, EGL_WINDOW_BIT, EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL_SAMPLES, 0, EGL_NONE };
+    const EGLint config_attribs[] = {
+        EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+
+        EGL_DEPTH_SIZE, 24,
+        EGL_STENCIL_SIZE, 8,
+
+        EGL_SAMPLE_BUFFERS, 1,
+        EGL_SAMPLES, 4,
+
+        EGL_NONE,
+    };
 
     return choose_config_with_pixel_format(
         renderer->egl_display,
@@ -678,7 +698,16 @@ ATTR_PURE EGLConfig gl_renderer_choose_config_direct(struct gl_renderer *rendere
     ASSUME_PIXFMT_VALID(pixel_format);
 
     const EGLint config_attribs[] = {
-        EGL_SURFACE_TYPE, EGL_WINDOW_BIT, EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL_SAMPLES, 0, EGL_NONE,
+        EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+
+        EGL_DEPTH_SIZE, 24,
+        EGL_STENCIL_SIZE, 8,
+
+        EGL_SAMPLE_BUFFERS, 1,
+        EGL_SAMPLES, 4,
+
+        EGL_NONE,
     };
 
     return choose_config_with_pixel_format(renderer->egl_display, config_attribs, pixel_format);
